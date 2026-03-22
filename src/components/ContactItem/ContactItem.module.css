@@ -1,0 +1,20 @@
+.item {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:white;
+  padding:14px 16px;
+  border-radius:14px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+.button {
+  background:#ef4444;
+  border:none;
+  color:white;
+  padding:8px 14px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.button:hover { background:#dc2626; }

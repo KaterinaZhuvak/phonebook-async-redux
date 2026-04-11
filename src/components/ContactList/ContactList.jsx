@@ -3,23 +3,19 @@ import ContactItem from '../ContactItem/ContactItem';
 import styles from './ContactList.module.css';
 import { useEffect } from 'react';
 import { fetchContacts } from '../../redux/contactsOperations';
+import { selectFilteredContacts } from '../../redux/contactSelectors';
 
 const ContactList = () => {
-  const dispatch = useDispatch(); // ✅ ТУТ
+  const contacts = useSelector(selectFilteredContacts);
+  const dispatch = useDispatch(); 
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const { items, filter } = useSelector(s => s.contacts);
-
-  const filtered = items.filter(c =>
-    c.name.toLowerCase().includes(filter.toLowerCase())
-  );
-
   return (
     <ul className={styles.list}>
-      {filtered.map(c => (
+      {contacts.map(c => (
         <ContactItem key={c.id} contact={c} />
       ))}
     </ul>

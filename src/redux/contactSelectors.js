@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
-// 🔹 базовий state
+
 const selectContactsState = state => state.contacts;
 
-// 🔹 через reselect
+
 export const selectContacts = createSelector(
   [selectContactsState],
   contactsState => contactsState.items
@@ -24,7 +24,7 @@ export const selectError = createSelector(
   contactsState => contactsState.error
 );
 
-// 🔥 головний memoized selector
+
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectFilter],
   (contacts, filter) => {

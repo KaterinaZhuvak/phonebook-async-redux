@@ -1,10 +1,15 @@
 import { createSelector } from 'reselect';
+import { createEntityAdapter } from '@reduxjs/toolkit';
 
-export const selectContacts = state => state.contacts.items;
+const adapter = createEntityAdapter();
+
+const selectContactsState = state => state.contacts;
+
+
+const { selectAll } = adapter.getSelectors(selectContactsState);
+
+export const selectContacts = selectAll;
 export const selectFilter = state => state.filter;
-
-export const selectIsLoading = state => state.contacts.isLoading;
-export const selectError = state => state.contacts.error;
 
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectFilter],

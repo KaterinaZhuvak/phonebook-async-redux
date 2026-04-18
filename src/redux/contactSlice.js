@@ -1,40 +1,51 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from './contactsOperations';
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+} from './contactsOperations';
+
+
+const contactsAdapter = createEntityAdapter();
+
+
+const initialState = contactsAdapter.getInitialState({
+  isLoading: false,
+  error: null,
+});
+
 const contactSlice = createSlice({
   name: 'contacts',
-
-  initialState: {
-    items: [],
-    isLoading: false,
-    error: null,
-  },
+  initialState,
 
   reducers: {},
 
   extraReducers: builder => {
     builder
+    
       .addCase(fetchContacts.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = action.payload;
+        contactsAdapter.setAll(state, action.payload);
       })
       .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
 
+    
       .addCase(addContact.fulfilled, (state, action) => {
-        state.items.push(action.payload);
+        contactsAdapter.addOne(state, action.payload);
       })
 
+   
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.items = state.items.filter(
-          c => c.id !== action.payload
-        );
+        contactsAdapter.removeOne(state, action.payload);
       });
   },
 });
+
 export default contactSlice.reducer;

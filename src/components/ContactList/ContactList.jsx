@@ -3,10 +3,11 @@ import ContactItem from '../ContactItem/ContactItem';
 import styles from './ContactList.module.css';
 import { useEffect } from 'react';
 import { fetchContacts } from '../../redux/contactsOperations';
+import { selectContacts } from '../../redux/contactSelectors';
 import { selectFilteredContacts } from '../../redux/contactSelectors';
 
 const ContactList = () => {
-  const contacts = useSelector(selectFilteredContacts);
+const contacts = useSelector(selectContacts);
   const dispatch = useDispatch(); 
 
   useEffect(() => {

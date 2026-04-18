@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contactsOperations';
+import { selectContacts } from '../../redux/contactSelectors';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 
@@ -11,7 +12,7 @@ import styles from "./ContactForm.module.css"
 const ContactForm = () => {
   const notyf = new Notyf();
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(selectContacts);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');

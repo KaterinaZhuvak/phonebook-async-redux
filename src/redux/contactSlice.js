@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchContacts, addContact, deleteContact } from './contactsOperations';
 const contactSlice = createSlice({
   name: 'contacts',
 
@@ -35,3 +37,4 @@ const contactSlice = createSlice({
       });
   },
 });
+export default contactSlice.reducer;

@@ -1,35 +1,15 @@
 import { createSelector } from 'reselect';
 
+export const selectContacts = state => state.contacts.items;
+export const selectFilter = state => state.filter;
 
-const selectContactsState = state => state.contacts;
-
-
-export const selectContacts = createSelector(
-  [selectContactsState],
-  contactsState => contactsState.items
-);
-
-export const selectFilter = createSelector(
-  [selectContactsState],
-  contactsState => contactsState.filter
-);
-
-export const selectIsLoading = createSelector(
-  [selectContactsState],
-  contactsState => contactsState.isLoading
-);
-
-export const selectError = createSelector(
-  [selectContactsState],
-  contactsState => contactsState.error
-);
-
+export const selectIsLoading = state => state.contacts.isLoading;
+export const selectError = state => state.contacts.error;
 
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectFilter],
-  (contacts, filter) => {
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  }
+  (contacts, filter) =>
+    contacts.filter(c =>
+      c.name.toLowerCase().includes(filter.toLowerCase())
+    )
 );

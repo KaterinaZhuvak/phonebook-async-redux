@@ -4,5 +4,6 @@ import contactsReducer from './redux/contactSlice';
 export const store = configureStore({
   reducer: {
     contacts: contactsReducer,
+    filter: filterReducer,
   },
 });

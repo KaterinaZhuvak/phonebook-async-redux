@@ -4,7 +4,7 @@ import styles from './Filter.module.css';
 
 const  Filter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(s => s.contacts.filter);
+  const filter = useSelector(s => s.filter);
 
   return (
     <input
